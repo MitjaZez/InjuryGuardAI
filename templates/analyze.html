@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Nova analiza | InjuryGuard AI MVP{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <div class="text-center">
+            <span class="badge bg-primary-subtle text-primary mb-3">
+                Unos podataka
+            </span>
+
+            <h1 class="fw-bold mb-3">
+                Procena rizika od povrede
+            </h1>
+
+            <p class="text-muted mb-0">
+                Unesite osnovne podatke o treningu i stanju sportiste. Sistem će na osnovu njih proceniti nivo rizika i dati preporuku.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="form-card mx-auto">
+
+            <form action="{{ url_for('analyze') }}" method="POST">
+
+                <h4 class="fw-bold mb-4">Podaci o sportisti</h4>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label for="athlete_name" class="form-label">Ime sportiste</label>
+                        <input type="text" class="form-control" id="athlete_name" name="athlete_name" placeholder="npr. Marko" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="sport" class="form-label">Sport</label>
+                        <input type="text" class="form-control" id="sport" name="sport" placeholder="npr. fudbal, košarka, trčanje" required>
+                    </div>
+                </div>
+
+                <h4 class="fw-bold mb-4">Podaci o treningu</h4>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="weekly_sessions" class="form-label">Broj treninga ove nedelje</label>
+                        <input type="number" class="form-control" id="weekly_sessions" name="weekly_sessions" min="0" max="14" placeholder="npr. 5" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="training_duration" class="form-label">Trajanje poslednjeg treninga (min)</label>
+                        <input type="number" class="form-control" id="training_duration" name="training_duration" min="0" max="300" placeholder="npr. 90" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="intensity" class="form-label">Intenzitet treninga (1–10)</label>
+                        <input type="number" class="form-control" id="intensity" name="intensity" min="1" max="10" placeholder="1 = lako, 10 = maksimalno" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="fatigue" class="form-label">Subjektivni umor (1–10)</label>
+                        <input type="number" class="form-control" id="fatigue" name="fatigue" min="1" max="10" placeholder="1 = odmoran, 10 = iscrpljen" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="sleep_quality" class="form-label">Kvalitet sna (1–10)</label>
+                        <input type="number" class="form-control" id="sleep_quality" name="sleep_quality" min="1" max="10" placeholder="1 = loše, 10 = odlično" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="pain_level" class="form-label">Bol / nelagodnost (0–10)</label>
+                        <input type="number" class="form-control" id="pain_level" name="pain_level" min="0" max="10" placeholder="0 = nema bola, 10 = jak bol" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="rest_days" class="form-label">Dani odmora u poslednjih 7 dana</label>
+                        <input type="number" class="form-control" id="rest_days" name="rest_days" min="0" max="7" placeholder="npr. 1" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="previous_injury" class="form-label">Prethodna povreda</label>
+                        <select class="form-select" id="previous_injury" name="previous_injury" required>
+                            <option value="">Izaberite opciju</option>
+                            <option value="no">Ne</option>
+                            <option value="yes">Da</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex gap-3">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Analiziraj rizik
+                    </button>
+
+                    <a href="/" class="btn btn-outline-primary btn-lg">
+                        Nazad na početnu
+                    </a>
+                </div>
+
+            </form>
+            {% if submitted_data %}
+                <div class="mt-5 p-4 bg-light rounded-4 border">
+                    <h5 class="fw-bold mb-3">Backend je uspešno primio podatke:</h5>
+
+                        <p><strong>Ime:</strong> {{ submitted_data.athlete_name }}</p>
+                        <p><strong>Sport:</strong> {{ submitted_data.sport }}</p>
+                        <p><strong>Broj treninga ove nedelje:</strong> {{ submitted_data.weekly_sessions }}</p>
+                        <p><strong>Trajanje treninga:</strong> {{ submitted_data.training_duration }} min</p>
+                        <p><strong>Intenzitet:</strong> {{ submitted_data.intensity }}/10</p>
+                        <p><strong>Umor:</strong> {{ submitted_data.fatigue }}/10</p>
+                        <p><strong>Kvalitet sna:</strong> {{ submitted_data.sleep_quality }}/10</p>
+                        <p><strong>Bol / nelagodnost:</strong> {{ submitted_data.pain_level }}/10</p>
+                        <p><strong>Dani odmora:</strong> {{ submitted_data.rest_days }}</p>
+                        <p><strong>Prethodna povreda:</strong> {{ submitted_data.previous_injury }}</p>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Rezultat analize | InjuryGuard AI MVP{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <div class="text-center">
+            <span class="badge bg-primary-subtle text-primary mb-3">
+                Rezultat analize
+            </span>
+
+            <h1 class="fw-bold mb-3">
+                Procena rizika za {{ data.athlete_name }}
+            </h1>
+
+            <p class="text-muted mb-0">
+                Sport: {{ data.sport }}
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="result-card mx-auto">
+
+            <div class="text-center mb-4">
+                <h2 class="fw-bold mb-2">{{ result.risk_score }}/100</h2>
+                <h4 class="fw-bold">{{ result.risk_level }}</h4>
+            </div>
+
+            <div class="progress-bar" role="progressbar"
+                style="width: {{ result.risk_score }}%;"
+                aria-valuenow="{{ result.risk_score }}"
+                aria-valuemin="0"
+                 aria-valuemax="100">
+            </div>
+
+            <div class="mb-4">
+                <h5 class="fw-bold mb-3">Detektovani faktori rizika:</h5>
+
+                <ul class="list-group">
+                    {% for factor in result.risk_factors %}
+                        <li class="list-group-item">
+                            {{ factor }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="recommendation-box">
+                <h5 class="fw-bold mb-2">Preporuka sistema:</h5>
+                <p class="mb-0">
+                    {{ result.recommendation }}
+                </p>
+            </div>
+
+            <div class="mt-5 d-flex gap-3 justify-content-center">
+                <a href="/analyze" class="btn btn-primary btn-lg">
+                    Nova analiza
+                </a>
+
+                <a href="/" class="btn btn-outline-primary btn-lg">
+                    Početna
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

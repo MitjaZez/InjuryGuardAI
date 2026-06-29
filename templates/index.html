@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Početna | InjuryGuard AI MVP{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-75">
+            <div class="col-lg-6">
+                <span class="badge bg-primary-subtle text-primary mb-3">
+                    MVP verzija sistema
+                </span>
+
+                <h1 class="display-5 fw-bold mb-4">
+                    Pametna procena rizika od sportskih povreda
+                </h1>
+
+                <p class="lead text-muted mb-4">
+                    InjuryGuard AI omogućava unos osnovnih podataka o treningu i fizičkom stanju sportiste, 
+                    nakon čega sistem procenjuje rizik od povrede i daje preporuku za dalje postupanje.
+                </p>
+
+                <div class="d-flex gap-3">
+                    <a href="/analyze" class="btn btn-primary btn-lg">
+                        Pokreni analizu
+                    </a>
+                    <a href="#how-it-works" class="btn btn-outline-primary btn-lg">
+                        Kako funkcioniše
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mt-5 mt-lg-0">
+                <div class="hero-card">
+                    <h5 class="fw-bold mb-3">Šta MVP demonstrira?</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3">✅ Manuelni unos podataka o treningu</li>
+                        <li class="mb-3">✅ Procenu nivoa rizika od povrede</li>
+                        <li class="mb-3">✅ Preporuku za trening ili odmor</li>
+                        <li>✅ Osnovu za dalji razvoj AI sistema</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="how-it-works" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Kako funkcioniše MVP?</h2>
+            <p class="text-muted">
+                Sistem prati jednostavan tok: unos podataka, analiza, procena rizika i preporuka.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <div class="feature-icon">1</div>
+                    <h5>Unos podataka</h5>
+                    <p>Korisnik unosi podatke o treningu, umoru, snu i eventualnom bolu.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <div class="feature-icon">2</div>
+                    <h5>Analiza</h5>
+                    <p>Sistem obrađuje podatke i prepoznaje moguće rizične obrasce.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <div class="feature-icon">3</div>
+                    <h5>Procena rizika</h5>
+                    <p>Na osnovu analize prikazuje se nizak, umeren ili visok rizik.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <div class="feature-icon">4</div>
+                    <h5>Preporuka</h5>
+                    <p>Korisnik dobija savet da nastavi, smanji intenzitet ili odmori.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

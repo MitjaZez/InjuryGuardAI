@@ -14,16 +14,32 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="/">
-                InjuryGuard AI
-            </a>
+    <div class="container">
+        <a class="navbar-brand fw-bold text-primary" href="{{ url_for('home') }}">
+            InjuryGuard AI
+        </a>
 
-            <div class="ms-auto d-flex align-items-center gap-4">
-                <a href="/" class="nav-link">Početna</a>
-                <a href="/analyze" class="nav-link">Nova analiza</a>
-            </div>
+        <div class="ms-auto d-flex align-items-center gap-4">
+            <a href="{{ url_for('home') }}" class="nav-link">Početna</a>
+            <a href="{{ url_for('analyze') }}" class="nav-link">Nova analiza</a>
+
+            {% if session.get("user_id") %}
+                <a href="{{ url_for('history') }}" class="nav-link">Istorija</a>
+
+                <span class="navbar-text text-muted">
+                    Zdravo, {{ session.get("user_name") }}
+                </span>
+
+                <a href="{{ url_for('logout') }}" class="nav-link">Odjava</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="nav-link">Prijava</a>
+
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-sm">
+                    Registracija
+                </a>
+            {% endif %}
         </div>
+    </div>
     </nav>
 
     <main>

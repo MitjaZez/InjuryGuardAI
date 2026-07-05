@@ -7,6 +7,7 @@
 <section class="page-header">
     <div class="container">
         <div class="text-center">
+            
             <span class="badge bg-primary-subtle text-primary mb-3">
                 Rezultat analize
             </span>
@@ -31,11 +32,24 @@
                 <h4 class="fw-bold">{{ result.risk_level }}</h4>
             </div>
 
-            <div class="progress-bar" role="progressbar"
-                style="width: {{ result.risk_score }}%;"
-                aria-valuenow="{{ result.risk_score }}"
-                aria-valuemin="0"
-                 aria-valuemax="100">
+            {% if saved_to_history %}
+            <div class="alert alert-success text-center">
+                Analiza je sačuvana u vašoj istoriji.
+            </div>
+            {% else %}
+            <div class="alert alert-info text-center">
+                Rezultat nije sačuvan jer niste prijavljeni.
+                <a href="{{ url_for('login') }}">Prijavite se</a> da biste pratili istoriju analiza.
+            </div>
+            {% endif %}
+
+            <div class="progress mb-4" style="height: 18px;">
+                <div class="progress-bar" role="progressbar"
+                    style="width: {{ result.risk_score }}%;"
+                    aria-valuenow="{{ result.risk_score }}"
+                    aria-valuemin="0"
+                    aria-valuemax="100">
+                </div>
             </div>
 
             <div class="mb-4">

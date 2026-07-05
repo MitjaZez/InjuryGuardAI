@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Istorija analiza | InjuryGuard AI MVP{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <div class="text-center">
+            <span class="badge bg-primary-subtle text-primary mb-3">
+                Istorija
+            </span>
+
+            <h1 class="fw-bold mb-3">
+                Istorija analiza
+            </h1>
+
+            <p class="text-muted mb-0">
+                Pregled prethodno sačuvanih analiza rizika za vaš korisnički nalog.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+
+        {% if analyses %}
+            <div class="result-card mx-auto" style="max-width: 1000px;">
+
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th>Datum</th>
+                                <th>Sportista</th>
+                                <th>Sport</th>
+                                <th>Skor</th>
+                                <th>Nivo rizika</th>
+                                <th>Preporuka</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for analysis in analyses %}
+                                <tr>
+                                    <td>{{ analysis.created_at }}</td>
+                                    <td>{{ analysis.athlete_name }}</td>
+                                    <td>{{ analysis.sport }}</td>
+                                    <td>
+                                        <strong>{{ analysis.risk_score }}/100</strong>
+                                    </td>
+                                    <td>{{ analysis.risk_level }}</td>
+                                    <td>{{ analysis.recommendation }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        {% else %}
+            <div class="result-card mx-auto text-center" style="max-width: 700px;">
+                <h4 class="fw-bold mb-3">Još uvek nemate sačuvane analize.</h4>
+
+                <p class="text-muted mb-4">
+                    Kada budete prijavljeni i izvršite analizu, rezultat će se automatski sačuvati ovde.
+                </p>
+
+                <a href="{{ url_for('analyze') }}" class="btn btn-primary btn-lg">
+                    Pokreni prvu analizu
+                </a>
+            </div>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

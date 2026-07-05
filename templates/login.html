@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Prijava | InjuryGuard AI MVP{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <div class="text-center">
+            <span class="badge bg-primary-subtle text-primary mb-3">
+                Korisnički nalog
+            </span>
+
+            <h1 class="fw-bold mb-3">
+                Prijava
+            </h1>
+
+            <p class="text-muted mb-0">
+                Prijavite se kako biste mogli da čuvate i pratite istoriju analiza.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="form-card mx-auto" style="max-width: 600px;">
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert alert-warning">
+                        {% for message in messages %}
+                            <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('login') }}" method="POST">
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email adresa</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="form-label">Lozinka</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg w-100">
+                    Prijavi se
+                </button>
+
+            </form>
+
+            <p class="text-center text-muted mt-4 mb-0">
+                Nemate nalog?
+                <a href="/register">Registrujte se</a>
+            </p>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
